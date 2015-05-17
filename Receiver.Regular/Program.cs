@@ -9,6 +9,7 @@ namespace Receiver.Regular
         {
             var configuration = new BusConfiguration();
             configuration.EndpointName("x-receiver-regular");
+            configuration.UseTransport<AzureServiceBusTransport>().ConnectionString("Endpoint=sb://seanfeldman-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=");
             configuration.UsePersistence<InMemoryPersistence>();
             configuration.UseSerialization<JsonSerializer>();
             configuration.EnableInstallers();

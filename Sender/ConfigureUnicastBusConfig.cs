@@ -15,12 +15,6 @@ namespace Sender
                     {
                         Endpoint = "x-receiver-regular",
                         Messages = "Messages.Events.NotifyEvent, Messages"
-                    },
-                    new MessageEndpointMapping
-                    {
-                        Endpoint = "x-receiver-preferred",
-                        AssemblyName = "Messages",
-                        Namespace = "Messages.Events"
                     }
                 }
             };

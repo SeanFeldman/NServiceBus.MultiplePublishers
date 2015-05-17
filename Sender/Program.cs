@@ -10,6 +10,7 @@ namespace Sender
         {
             var configuration = new BusConfiguration();
             configuration.EndpointName("x-sender");
+            configuration.UseTransport<AzureServiceBusTransport>().ConnectionString("Endpoint=sb://seanfeldman-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=");
             configuration.UsePersistence<InMemoryPersistence>();
             configuration.UseSerialization<JsonSerializer>();
             configuration.EnableInstallers();
