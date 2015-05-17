@@ -1,5 +1,6 @@
 ﻿using System;
 using NServiceBus;
+using NServiceBus.Persistence;
 
 namespace Receiver.Regular
 {
@@ -10,6 +11,7 @@ namespace Receiver.Regular
             var configuration = new BusConfiguration();
             configuration.EndpointName("x-receiver-regular");
             configuration.UsePersistence<InMemoryPersistence>();
+            configuration.UsePersistence<AzureStoragePersistence, StorageType.Subscriptions>().ConnectionString("UseDevelopmentStorage=true");
             configuration.UseSerialization<JsonSerializer>();
             configuration.EnableInstallers();
             using (var bus = Bus.Create(configuration))

@@ -1,6 +1,7 @@
 ﻿using System;
 using Messages.Commands;
 using NServiceBus;
+using NServiceBus.Persistence;
 
 namespace Sender
 {
@@ -11,6 +12,7 @@ namespace Sender
             var configuration = new BusConfiguration();
             configuration.EndpointName("x-sender");
             configuration.UsePersistence<InMemoryPersistence>();
+            configuration.UsePersistence<AzureStoragePersistence, StorageType.Subscriptions>().ConnectionString("UseDevelopmentStorage=true");
             configuration.UseSerialization<JsonSerializer>();
             configuration.EnableInstallers();
             using (var bus = Bus.Create(configuration))
