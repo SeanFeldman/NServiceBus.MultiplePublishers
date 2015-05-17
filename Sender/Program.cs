@@ -1,6 +1,7 @@
 ﻿using System;
 using Messages.Commands;
 using NServiceBus;
+using NServiceBus.Persistence;
 
 namespace Sender
 {
@@ -10,8 +11,9 @@ namespace Sender
         {
             var configuration = new BusConfiguration();
             configuration.EndpointName("x-sender");
-            configuration.UseTransport<AzureServiceBusTransport>().ConnectionString("Endpoint=sb://seanfeldman-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=");
+            configuration.UseTransport<AzureServiceBusTransport>().ConnectionString("Endpoint=sb://seanfeldman-test.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=VB/pEide3r1PWV094sR3SlzpcaBJtKMnctpsb4JmeU8=");
             configuration.UsePersistence<InMemoryPersistence>();
+            configuration.UsePersistence<AzureStoragePersistence, StorageType.Subscriptions>();
             configuration.UseSerialization<JsonSerializer>();
             configuration.EnableInstallers();
             using (var bus = Bus.Create(configuration))
@@ -41,12 +43,12 @@ namespace Sender
 
         private static void SendPreferedCommand(IBus bus)
         {
-            bus.Send("x-receiver-preferred", new PreferredCommand {Description = "preferred command", Extra = "wow"});
+            bus.Send("x-receiver-preferred-xps13", new PreferredCommand {Description = "preferred command", Extra = "wow"});
         }
 
         private static void SendRegularCommand(IBus bus)
         {
-            bus.Send("x-receiver-regular", new RegularCommand { Description = "regular command" });
+            bus.Send("x-receiver-regular-xps13", new RegularCommand { Description = "regular command" });
         }
     }
 }

@@ -13,8 +13,14 @@ namespace Sender
                 {
                     new MessageEndpointMapping
                     {
-                        Endpoint = "x-receiver-regular",
+                        Endpoint = "x-receiver-regular-xps13",
                         Messages = "Messages.Events.NotifyEvent, Messages"
+                    },
+                    new MessageEndpointMapping
+                    {
+                        Endpoint = "x-receiver-preferred-xps13",
+                        AssemblyName = "Messages",
+                        Namespace = "Messages.Events"
                     }
                 }
             };
